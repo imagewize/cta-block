@@ -1,0 +1,43 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "create-block/cta-block",
+    "version": "0.1.0",
+    "title": "CTA Block",
+    "category": "text",
+    "icon": "smiley",
+    "description": "A Call to Action block with customizable content",
+    "supports": {
+        "html": false,
+        "align": ["full", "wide"],
+        "color": {
+            "background": true,
+            "text": true,
+            "link": true
+        },
+        "spacing": {
+            "padding": true,
+            "margin": true
+        }
+    },
+    "attributes": {
+        "align": {
+            "type": "string",
+            "default": "full"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#2563eb"
+        },
+        "buttonHoverColor": {
+            "type": "string",
+            "default": "#1e40af"
+        }
+    },
+    "styles": [],
+    "textdomain": "cta-block",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "viewScript": "file:./view.js"
+}
