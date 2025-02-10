@@ -1,11 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "create-block/cta-block",
+  "name": "imagewize/cta-block",
   "version": "0.1.0",
   "title": "CTA Block",
   "category": "text",
-  "icon": "smiley",
+  "icon": "controls-volumeon",
   "description": "A Call to Action block with customizable content",
   "supports": {
     "html": false,
@@ -36,10 +36,6 @@
     "textColor": {
       "type": "string",
       "default": "white"
-    },
-    "buttonHoverColor": {
-      "type": "string",
-      "default": "sky-800"
     },
     "style": {
       "type": "object",

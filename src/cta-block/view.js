@@ -21,5 +21,5 @@
  */
 
 /* eslint-disable no-console */
-console.log( 'Hello World! (from create-block-cta-block block)' );
+console.log( 'Hello World! (from imagewize-cta-block block)' );
 /* eslint-enable no-console */

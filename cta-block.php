@@ -1,16 +1,18 @@
 <?php
 /**
- * Plugin Name:       Cta Block
- * Description:       Example block scaffolded with Create Block tool.
+ * Plugin Name:       CTA Block
+ * Description:       A Call to Action block with customizable content, background colors, and hover effects. Perfect for creating engaging call-to-action sections in your content.
  * Version:           0.1.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
- * Author:            The WordPress Contributors
+ * Author:            Imagewize
+ * Author URI:        https://imagewize.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       cta-block
  *
- * @package CreateBlock
+ * @package          Imagewize
+ * @author           Jasper Frumau <jasper@imagewize.com>
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
