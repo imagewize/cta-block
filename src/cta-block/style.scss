@@ -18,14 +18,17 @@
 
     .wp-block-button__link {
         font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-            background-color: var(--wp--custom--button--hover-color, #1e40af) !important;
-        }
     }
 
     h1, h2, h3, h4, h5, h6, p {
         font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    .wp-block-button__link.has-hover-background {
+        transition: background-color 0.2s ease-in-out;
+        
+        &:hover {
+            background-color: var(--wp--preset--color--sky-800) !important;
+        }
     }
 }

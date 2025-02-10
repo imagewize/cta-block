@@ -11,8 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InnerBlocks, ColorPalette, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import { useBlockProps, InnerBlocks, InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -26,14 +25,15 @@ const TEMPLATE = [
     ['core/spacer', { height: '60px' }],
     ['core/columns', { align: 'wide' }, [
         ['core/column', { width: '20%' }],
-        ['core/column', { width: '60%' }, [
+        ['core/column', { width: '60%', layout: { type: 'constrained' } }, [
             ['core/heading', { 
                 textAlign: 'center',
                 content: 'We are here to help you. Let\'s talk.',
                 fontSize: '3xl',
+                fontFamily: 'open-sans',
                 style: {
                     typography: {
-                        fontFamily: 'Open Sans, system-ui, -apple-system, sans-serif',
+                        fontStyle: 'normal',
                         fontWeight: '700'
                     }
                 }
@@ -42,16 +42,24 @@ const TEMPLATE = [
                 align: 'center',
                 content: 'Went through it all here at Imagewize and curious? You have questions? A possible project you would like to discuss with us? Do now hesitate to hit us up!',
                 fontSize: 'lg',
+                fontFamily: 'open-sans',
                 style: {
                     typography: {
-                        fontFamily: 'Open Sans, system-ui, -apple-system, sans-serif',
                         lineHeight: 1.6
+                    },
+                    layout: {
+                        selfStretch: 'fixed',
+                        flexSize: '70%'
                     }
                 }
             }],
             ['core/buttons', { layout: { type: 'flex', justifyContent: 'center' } }, [
                 ['core/button', {
+                    content: 'Say Hi!',
                     width: 50,
+                    fontFamily: 'open-sans',
+                    backgroundColor: 'sky-700',
+                    className: `has-hover-background`,
                     style: {
                         border: { radius: '5px' },
                         spacing: { padding: { top: 'var:preset|spacing|40', bottom: 'var:preset|spacing|40' } }
@@ -71,19 +79,19 @@ export default function Edit({ attributes, setAttributes }) {
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__('Button Settings', 'cta-block')}>
-                    <ColorPalette
-                        value={buttonHoverColor}
-                        onChange={(color) => setAttributes({ buttonHoverColor: color })}
-                        label={__('Button Hover Color', 'cta-block')}
-                    />
-                </PanelBody>
+                <PanelColorSettings
+                    title={__('Button Color Settings', 'cta-block')}
+                    colorSettings={[
+                        {
+                            value: buttonHoverColor,
+                            onChange: (color) => setAttributes({ buttonHoverColor: color }),
+                            label: __('Button Hover Color'),
+                        },
+                    ]}
+                />
             </InspectorControls>
             <div {...blockProps}>
-                <InnerBlocks
-                    template={TEMPLATE}
-                    templateLock="all"
-                />
+                <InnerBlocks template={TEMPLATE} />
             </div>
         </>
     );

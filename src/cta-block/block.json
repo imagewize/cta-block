@@ -13,7 +13,8 @@
         "color": {
             "background": true,
             "text": true,
-            "link": true
+            "link": true,
+            "gradients": true
         },
         "spacing": {
             "padding": true,
@@ -27,17 +28,44 @@
         },
         "backgroundColor": {
             "type": "string",
-            "default": "#2563eb"
+            "default": "sky-600"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "white"
         },
         "buttonHoverColor": {
             "type": "string",
-            "default": "#1e40af"
+            "default": "sky-800"
+        },
+        "style": {
+            "type": "object",
+            "default": {
+                "spacing": {
+                    "padding": {
+                        "top": "calc( 0.5 * var(--wp--style--root--padding-right, var(--wp--custom--gap--horizontal)))",
+                        "bottom": "calc( 0.5 * var(--wp--style--root--padding-right, var(--wp--custom--gap--horizontal)))",
+                        "left": "var(--wp--style--root--padding-left, var(--wp--custom--gap--horizontal))",
+                        "right": "var(--wp--style--root--padding-right, var(--wp--custom--gap--horizontal))"
+                    },
+                    "margin": {
+                        "top": "0",
+                        "bottom": "0"
+                    }
+                },
+                "elements": {
+                    "link": {
+                        "color": {
+                            "text": "var:preset|color|white"
+                        }
+                    }
+                }
+            }
         }
     },
     "styles": [],
     "textdomain": "cta-block",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
-    "style": "file:./style-index.css",
-    "viewScript": "file:./view.js"
+    "style": "file:./style-index.css"
 }
