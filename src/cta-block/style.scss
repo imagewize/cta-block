@@ -5,7 +5,7 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-cta-block {
+.wp-block-imagewize-cta-block {
 	background-color: #21759b;
 	color: #fff;
 	padding: 2px;
@@ -16,16 +16,12 @@
         margin-right: 0;
     }
 
+    // Handle button hover styles
     .wp-block-button__link {
-        font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-            background-color: var(--wp--custom--button--hover-color, #1e40af) !important;
-        }
+        transition: background-color 0.2s ease-in-out;
     }
 
-    h1, h2, h3, h4, h5, h6, p {
-        font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+    .wp-block-button.has-hover-background .wp-block-button__link:hover {
+        background-color: var(--button-hover-background, #075985) !important;
     }
 }

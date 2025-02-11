@@ -11,8 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InnerBlocks, ColorPalette, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -21,20 +20,24 @@ import { PanelBody } from '@wordpress/components';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+import './extends/button-hover-filter';
 
 const TEMPLATE = [
     ['core/spacer', { height: '60px' }],
     ['core/columns', { align: 'wide' }, [
         ['core/column', { width: '20%' }],
-        ['core/column', { width: '60%' }, [
+        ['core/column', { width: '60%', layout: { type: 'constrained' } }, [
             ['core/heading', { 
                 textAlign: 'center',
                 content: 'We are here to help you. Let\'s talk.',
                 fontSize: '3xl',
+                textColor: 'white',
                 style: {
                     typography: {
-                        fontFamily: 'Open Sans, system-ui, -apple-system, sans-serif',
-                        fontWeight: '700'
+                        fontFamily: "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+                        fontStyle: 'normal',
+                        fontWeight: '700',
+                        lineHeight: '1.2'
                     }
                 }
             }],
@@ -42,20 +45,32 @@ const TEMPLATE = [
                 align: 'center',
                 content: 'Went through it all here at Imagewize and curious? You have questions? A possible project you would like to discuss with us? Do now hesitate to hit us up!',
                 fontSize: 'lg',
+                textColor: 'white',
                 style: {
                     typography: {
-                        fontFamily: 'Open Sans, system-ui, -apple-system, sans-serif',
-                        lineHeight: 1.6
+                        fontFamily: "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+                        lineHeight: '1.6'
+                    },
+                    layout: {
+                        selfStretch: 'fixed',
+                        flexSize: '70%'
                     }
                 }
             }],
             ['core/buttons', { layout: { type: 'flex', justifyContent: 'center' } }, [
                 ['core/button', {
+                    content: 'Say Hi!',
                     width: 50,
                     style: {
+                        typography: {
+                            fontFamily: "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+                            lineHeight: '1.4'
+                        },
                         border: { radius: '5px' },
                         spacing: { padding: { top: 'var:preset|spacing|40', bottom: 'var:preset|spacing|40' } }
-                    }
+                    },
+                    backgroundColor: 'sky-700',
+                    className: 'has-hover-background'
                 }]
             ]]
         ]],
@@ -66,25 +81,9 @@ const TEMPLATE = [
 
 export default function Edit({ attributes, setAttributes }) {
     const blockProps = useBlockProps();
-    const { buttonHoverColor } = attributes;
-
     return (
-        <>
-            <InspectorControls>
-                <PanelBody title={__('Button Settings', 'cta-block')}>
-                    <ColorPalette
-                        value={buttonHoverColor}
-                        onChange={(color) => setAttributes({ buttonHoverColor: color })}
-                        label={__('Button Hover Color', 'cta-block')}
-                    />
-                </PanelBody>
-            </InspectorControls>
-            <div {...blockProps}>
-                <InnerBlocks
-                    template={TEMPLATE}
-                    templateLock="all"
-                />
-            </div>
-        </>
+        <div {...blockProps}>
+            <InnerBlocks template={TEMPLATE} />
+        </div>
     );
 }
