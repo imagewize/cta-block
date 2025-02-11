@@ -16,19 +16,12 @@
         margin-right: 0;
     }
 
-    .wp-block-button__link.has-hover-background {
+    // Handle button hover styles
+    .wp-block-button__link {
         transition: background-color 0.2s ease-in-out;
-        
-        &:hover {
-            background-color: var(--wp--custom--button-hover-color) !important;
-        }
     }
 
-    .wp-block-button.has-hover-background {
-        .wp-block-button__link {
-            &:hover {
-                background-color: var(--wp--custom--button-hover-color) !important;
-            }
-        }
+    .wp-block-button.has-hover-background .wp-block-button__link:hover {
+        background-color: var(--button-hover-background, #075985) !important;
     }
 }

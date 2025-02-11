@@ -1,6 +1,11 @@
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { InspectorControls, PanelColorSettings, useSettings } from '@wordpress/block-editor';
+import { 
+    InspectorControls,
+    __experimentalColorGradientSettingsDropdown as ColorGradientSettingsDropdown,
+    __experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
+    getColorObjectByColorValue
+} from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 // Add hover color attribute to button block
@@ -13,7 +18,7 @@ const addHoverColorAttribute = (settings, name) => {
             ...settings.attributes,
             hoverBackgroundColor: {
                 type: 'string',
-                default: 'var(--wp--preset--color--sky-800)'
+                default: '#075985'
             }
         }
     };
@@ -29,7 +34,7 @@ const withHoverColorControl = createHigherOrderComponent((BlockEdit) => {
         }
 
         const { attributes, setAttributes, clientId } = props;
-        const [colors] = useSettings('color.palette');
+        const colorSettings = useMultipleOriginColorsAndGradients();
 
         // Check if button is within our CTA block
         const parentClientId = wp.data.select('core/block-editor').getBlockParents(clientId);
@@ -41,18 +46,24 @@ const withHoverColorControl = createHigherOrderComponent((BlockEdit) => {
         return (
             <>
                 <BlockEdit {...props} />
-                <InspectorControls>
-                    <PanelColorSettings
-                        title={__('Button Hover Settings', 'cta-block')}
-                        initialOpen={true}
-                        colorSettings={[
+                <InspectorControls group="color">
+                    <ColorGradientSettingsDropdown
+                        __experimentalIsRenderedInSidebar
+                        settings={[
                             {
-                                value: attributes.hoverBackgroundColor,
-                                onChange: (color) => setAttributes({ hoverBackgroundColor: color }),
-                                label: __('Hover Background Color'),
-                                colors,
+                                colorValue: attributes.hoverBackgroundColor,
+                                onColorChange: (color) => {
+                                    setAttributes({ hoverBackgroundColor: color });
+                                },
+                                label: __('Hover Background'),
+                                enableAlpha: true,
+                                contrastChecks: [],
                             }
                         ]}
+                        panelId={clientId}
+                        {...colorSettings}
+                        gradients={[]}
+                        disableCustomGradients={true}
                     />
                 </InspectorControls>
             </>
@@ -67,23 +78,15 @@ const addHoverColorClass = (props, blockType) => {
     const { className, style, attributes } = props;
     if (!attributes?.hoverBackgroundColor) return props;
 
-    // Clean up the color value and ensure proper format
-    let hoverColor = attributes.hoverBackgroundColor;
-    
-    // If it's a theme color (not hex), format it properly
-    if (!hoverColor.startsWith('#')) {
-        // Remove any existing var() wrapper
-        hoverColor = hoverColor.replace('var(--wp--preset--color--', '').replace(')', '');
-        // Format as CSS variable
-        hoverColor = `var(--wp--preset--color--${hoverColor})`;
-    }
+    // Get the hover color
+    const hoverColor = attributes.hoverBackgroundColor;
 
     return {
         ...props,
         className: `${className || ''} has-hover-background`,
         style: {
             ...style,
-            '--wp--custom--button-hover-color': hoverColor
+            '--button-hover-background': hoverColor
         }
     };
 };
