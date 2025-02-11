@@ -1,0 +1,34 @@
+{
+    "name": "imagewize/cta-block",
+    "description": "A customizable Call-to-Action block for WordPress Gutenberg editor",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Jasper Frumau",
+            "email": "jasper@imagewize.com",
+            "homepage": "https://imagewize.com"
+        }
+    ],
+    "keywords": [
+        "wordpress",
+        "plugin",
+        "block-editor",
+        "gutenberg",
+        "cta",
+        "call-to-action"
+    ],
+    "support": {
+        "issues": "https://github.com/imagewize/cta-block/issues",
+        "source": "https://github.com/imagewize/cta-block"
+    },
+    "require": {
+        "php": ">=8.0",
+        "composer/installers": "^2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}
